@@ -57,7 +57,7 @@
                 <tbody>
                 {% for registro in registros %}
                     <tr>
-                        <td><a href="{{ path('registro_show', { 'id': registro.slug}) }}">{{ registro.slug }}</a></td>
+                        <td><a href="{{ path('registro_show', { 'slug': registro.slug}) }}">{{ registro.slug }}</a></td>
                         <td>{{ registro.paterno |title ~ ' ' ~ registro.materno |title ~ ' ' ~ registro.nombre |title }}</td>
                         <td>{{ registro.mail }}</td>
 
@@ -77,7 +77,7 @@
 
 
                         <td class="text-center">
-                            <a href="{{ path('registro_show', { 'id': registro.slug }) }}"><i class="fa fa-search-plus"></i></a>
+                            <a href="{{ path('registro_show', { 'slug': registro.slug }) }}"><i class="fa fa-search-plus"></i></a>
 
 
                         </td>
