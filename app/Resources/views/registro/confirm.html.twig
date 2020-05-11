@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+        <h2>Confirmación</h2>
+        <hr>
+        <div class="alert alert-dismissable alert-light">
+            <h4><strong>
+
+                <p class="mt-5"><i class="fa fa-check"></i>  {{ entity.nombre|title }} {{ entity.paterno|title }} {{ entity.materno|title }}</strong> gracias por su registro.</p>
+                <p class="mt-5">Recibirá un correo de confirmación a la dirección que nos proporcionó: <strong><i>{{ entity.mail }}</i></strong></p>
+            </h4>
+            <br>
+            <p class="pt-3">Si no recibe el correo de confirmación debe verificar en su bandeja de correos no deseados, si no lo ha recibido debe escribir a <strong>webmaster<i class="fa fa-at"></i>matmor.unam.mx</i></strong> para confirmar su registro</p>
+        </div>
+        <div class="col-lg-7">
+            <a href="http://www.matmor.unam.mx/" class="btn btn-primary active" role="button" aria-pressed="true">Finalizar</a>
+        </div>
+    </div>
+
+{% endblock %}

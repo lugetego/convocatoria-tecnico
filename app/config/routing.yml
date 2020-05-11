@@ -1,0 +1,31 @@
+registro:
+    resource: "@RegistroBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+new:
+    pattern:   /registro/{_locale}/new
+    defaults:  { _controller: RegistroBundle:Registro:new, _locale: es }
+    requirements:
+        _locale: en|es
+
+recom:
+    pattern:   /registro/{_locale}/{id}/{paterno}/{ref}/{mail}/{mail2}/recom
+    defaults:  { _controller: RegistroBundle:Registro:recom, _locale: es }
+    requirements:
+        _locale: en|es
+
+login:
+    pattern:   /login
+    defaults:  { _controller: RegistroBundle:Login:login }
+
+login_check:
+    pattern:   /login_check
+
+logout:
+    path: /logout
+
+registro_eval:
+    path:      /{id}/eval
+    defaults:  { _controller: RegistroBundle:Admin:eval }
+

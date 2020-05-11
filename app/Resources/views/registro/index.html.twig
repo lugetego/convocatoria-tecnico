@@ -1,0 +1,148 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {#    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">#}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+{% endblock %}
+
+{% block nav %}
+    <li class="nav-item nav-link active"><strong>Aplicantes a la plaza de Técnico Académico</strong></li>
+    <li><a data-toggle="modal" data-target="#correos">Correos</a></li>
+{% endblock %}
+
+{% block navr %}
+    <li class="active"><a href="{{ path('logout') }}">Logout<span class="sr-only">(current)</span></a></li>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        {% if is_granted('ROLE_CONSULTA') %}
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover table-condensed" id="example">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>CV</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for registro in registros %}
+                        <tr>
+                            <td><a href="{{ path('registro_show', { 'id': registro.id}) }}">{{ registro.id }}</a></td>
+                            <td>{{ registro.paterno |title ~ ' ' ~ registro.materno |title ~ ' ' ~ registro.nombre |title }}</td>
+                            <td><a href="{{ vich_uploader_asset(registro, 'cvFile') }}"  target="_blank" />{{ registro.cvName }}</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+
+        <div class="table-responsive pt-5">
+            <table class="table table-striped table-bordered table-hover table-condensed" id="example">
+                <thead>
+
+                <tr>
+                    <th class="text-center">Id</th>
+                    <th class="text-center">Nombre</th>
+                    <th class="text-center">Correo</th>
+                    <th class="text-center">Recomendación 1</th>
+                    <th class="text-center">Recomendación 2</th>
+                    <th class="text-center">Activo</th>
+                    <th class="text-center">Ver</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for registro in registros %}
+                    <tr>
+                        <td><a href="{{ path('registro_show', { 'id': registro.id}) }}">{{ registro.id }}</a></td>
+                        <td>{{ registro.paterno |title ~ ' ' ~ registro.materno |title ~ ' ' ~ registro.nombre |title }}</td>
+                        <td>{{ registro.mail }}</td>
+
+
+                        <td>{% if registro.ref1recomName %}<span class="label label-success "><i class="fa fa-check-square"></i> Si</span> {% else %}<span class="label label-danger"><i class="fa fa-times-circle"></i> No</span>{% endif %} </td>
+                        <td>{% if registro.ref2recomName %}<span class="label label-success "><i class="fa fa-check-square"></i> Si</span> {% else %}<span class="label label-danger"><i class="fa fa-times-circle"></i> No</span>{% endif %}</td>
+                        <td class="text-center">{% if registro.activo == true %}
+                                <span class="label label-success "><i class="fa fa-check-square"></i> Si</span>
+                            {% elseif registro.activo is null %}
+                                <span class="label label-warning "><i class="fa fa-check-exclamation"></i> <i class="fa fa-exclamation-circle"></i> Pendiente</span>
+                            {% elseif registro.activo == false %}
+                                <span class="label label-danger"><i class="fa fa-times-circle"></i> No</span>
+                            {% endif %}
+                        </td>
+
+
+
+
+                        <td class="text-center">
+                            <a href="{{ path('registro_show', { 'id': registro.id }) }}"><i class="fa fa-search-plus"></i></a>
+
+
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+
+
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="correos">
+        <div class="modal-dialog modal-lg" id="correos">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="gridSystemModalLabel">Correos</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            {% set total = 0 %}
+
+                            {% for registro in registros %}
+
+                                {{ registro.mail }},
+
+                                {% set total = total + 1 %}
+                            {% endfor %}
+
+                        </div>
+                    </div>
+
+                    <br><br><strong>{{ total }} registros</strong>
+                </div>
+
+
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+        {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function() {
+                $('#example').DataTable({
+                    "language": {
+                        "url": "https://cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
+                    }
+                });
+            }
+        );
+    </script>
+{% endblock %}
+

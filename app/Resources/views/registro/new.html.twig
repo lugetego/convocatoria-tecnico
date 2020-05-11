@@ -1,0 +1,132 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme form 'registro/form_errors.html.twig' %}
+
+{% block nav %}
+    <li class="nav-item nav-link active"><strong>Formulario de solicitud para la plaza de Técnico Académico</strong></li>
+{% endblock %}
+
+{% block body %}
+
+    {{  form_errors(form) }}
+
+    <div class="container">
+
+        {% block info %}
+            <div class="alert alert-light text-dark" role="alert">
+                <p class="mt-2"><strong><h4>{{ 'Instrucciones'}}</h4></strong></p>
+                <p class="mb-2">{{ '- Asegúrese de que la información y los archivos que enviará sean los correctos, después de ser enviados ya no podrán ser modificados.' }}</p>
+                <p class="mb-2">{{ '- La documentación requerida sólo podrá ser recibida por medio de este sistema.'}}</p>
+                <p class="mb-2">{{ '- Los campos con * son requeridos. Cada uno de los archivos en los siguientes campos deberá ser en formato PDF.'}}</p>
+                <p class="mb-2">{{ '- Una vez concluido el proceso de registro de documentos, el solicitante recibirá un acuse de recibo. De no recibir dicha notificación o si se tiene algún problema con el llenado de esta solicitud, el solicitante debe ponerse en contacto al siguiente correo:'}}</p>
+                <strong>webmaster<i class="fa fa-at"></i>matmor.unam.mx</strong>
+            </div>
+        {% endblock %}
+
+        {{ form_start(form) }}
+
+        <h3 class="pt-3">Datos personales</h3>
+
+        <div class="card">
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="form-group col-md-4 col-sm-12">
+                        <div>
+                            <span class="text-secondary">{{ form_label(form.nombre, '*Nombre(s)') }}</span>
+                        </div>
+                        <div>
+                            {{ form_widget(form.nombre,{'attr': {'class': 'form-control', 'placeholder':'*Nombre(s)'} } ) }}
+                        </div>
+                        <div>{{ form_errors(form.nombre) }}</div>
+                    </div>
+                    <div class="form-group col-md-4 col-sm-12">
+                        <div>
+                            <span class="text-secondary">{{ form_label(form.paterno, '*Apellido paterno') }}</span>
+                        </div>
+                        <div>
+                            {{ form_widget(form.paterno, {'attr': {'class': 'form-control', 'placeholder':'*Apellido paterno'} } ) }}
+                        </div>
+                        <div>{{ form_errors(form.paterno) }}</div>
+                    </div>
+                    <div class="form-group col-md-4 col-sm-12">
+                        <div>
+                            <span class="text-secondary">{{ form_label(form.materno, 'Apellido materno') }}</span>
+                        </div>
+                        <div>
+                            {{ form_widget(form.materno, {'attr': {'class': 'form-control','placeholder':'Apellido materno'} } ) }}
+                        </div>
+                        <div>{{ form_errors(form.materno) }}</div>
+                    </div>
+                    <div class="form-group col-md-4 col-sm-12">
+                        <div><span class="text-secondary">{{ form_label(form.mail, '*Correo electrónico') }}</span></div>
+                        <div>{{ form_widget(form.mail, {'attr': {'class': 'form-control', 'placeholder':'*Correo electrónico'} } ) }}</div>
+                        <div>{{ form_errors(form.mail) }}</div>
+                    </div>
+                    <div class="form-group col-md-8 col-sm-12">
+                        <div><span class="text-secondary">{{ form_label(form.direccion, '*Dirección') }}</span></div>
+                        <div>{{ form_widget(form.direccion, {'attr': {'class': 'form-control', 'placeholder':'*Dirección'} } ) }}</div>
+                        <div>{{ form_errors(form.direccion) }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="pt-3">Documentación</h3>
+
+
+        <div class="card">
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="form-group col-lg-6 col-md-4 col-sm-12">
+                        <div><span class="text-secondary">{{ form_widget(form.solicitudFile) }}</span></div>
+                        <div>{{ form_errors(form.solicitudFile) }}</div>
+                    </div>
+                    <div class="alert alert-light text-dark col-lg-6" role="alert">
+                        <p>{{ 'Especificando los motivos del interesado para laborar en el CCM.'}}</p>
+                        <p>{{ 'Incluir en la carta la dirección postal, la dirección de correo electrónico, y el teléfono del solicitante.'}}</p>
+                    </div>
+                    <div class="form-group col-lg-6 col-md-4 col-sm-12">
+                        <div><span class="text-secondary">{{ form_widget(form.cvFile) }}</span></div>
+                        <div>{{ form_errors(form.cvFile) }}</div>
+                    </div>
+                    <div class="form-group col-lg-6 col-md-4 col-sm-12">
+                        <div><span class="text-secondary">{{ form_widget(form.comprobanteFile) }}</span></div>
+                        <div>{{ form_errors(form.comprobanteFile) }}</div>
+                    </div>
+                    <div class="form-group col-lg-6 col-md-4 col-sm-12">
+                        <div><span class="text-secondary">{{ form_widget(form.cursoFile) }}</span></div>
+                        <div>{{ form_errors(form.cursoFile) }}</div>
+                    </div>
+                    <div class="col-lg-6 alert alert-light text-dark" role="alert">
+                        {{ 'Incluir todos en un solo archivo. Puede también especificar ligas para consulta de la información.'}}
+                    </div>
+
+                    <div class="col-lg-12 alert alert-light text-dark" role="alert">
+                        {{ 'Se solicita que proporcione 2 cartas de recomendación.' }}<br>
+                        Si en este momento no cuenta con los dos archivos enviarlos posteriormente a webmaster<i class="fa fa-at"></i>matmor.unam.mx antes de la fecha señalada en la convocatoria.
+                    </div>
+
+                    <div class="form-group col-lg-6 col-md-4 col-sm-12">
+                        <div><span class="text-secondary">{{ form_widget(form.ref1recomFile) }}</span></div>
+                        <div>{{ form_errors(form.ref1recomFile) }}</div><br>
+                    </div>
+                    <div class="form-group col-lg-6 col-md-4 col-sm-12">
+                        <div><span class="text-secondary">{{ form_widget(form.ref2recomFile) }}</span></div>
+                        <div>{{ form_errors(form.ref2recomFile) }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-7 pt-5 mx-auto">
+{#            <input type="submit" value="{{ 'Enviar información'|trans }}"  class="btn btn-secondary"/>#}
+            <button type="submit" class="btn btn-primary btn-lg">Enviar información</button>
+
+            {{ form_end(form) }}
+        </div>
+
+
+
+
+    </div>
+{% endblock %}

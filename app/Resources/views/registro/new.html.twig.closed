@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme form 'registro/form_errors.html.twig' %}
+
+{% block nav %}
+    {% if tipo=='computo' %}
+        <li class="active"><a href="#"><strong>Formulario de solicitud para la plaza de Técnico Académico - Unidad de Cómputo</strong></a></li>
+    {% endif %}
+
+    {% if tipo=='docencia' %}
+        <li class="active"><a href="#"><strong>Formulario de solicitud para la plaza de Técnico Académico - Unidad de Docencia</strong> </a></li>
+    {% endif %}
+
+
+{% endblock %}
+
+{% block body %}
+
+  <div class="container">
+
+        {% block info %}
+
+            <div class="alert alert-danger" role="alert">
+                <strong>Fecha de límite para la recepción de solicitudes: 31 de agosto de 2016</strong><br><br>
+                    </div>
+
+    </div>
+       {% endblock %}
+
+
+
+
+{% endblock %}

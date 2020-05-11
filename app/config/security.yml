@@ -1,0 +1,49 @@
+# To get started with security, check out the documentation:
+# http://symfony.com/doc/current/book/security.html
+security:
+
+   # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
+    providers:
+            in_memory:
+                memory:
+                    users:
+                        admin:
+                            password: $2a$12$L4k/IkqiBjC4YhKu9kox2OyKRgO1qIytoQwW4Xe3WklTULdFUowqm
+                            roles: 'ROLE_ADMIN'
+                        computo:
+                            password: $2a$12$FYS9SChTWMV3..dVHYzLxeoe1FOG3E1LOJOCNOsDBBayNocYlIAee 
+                            roles: 'ROLE_COMPUTO'
+                        docencia:
+                            password: $2a$12$EtiQN67pN0sk1DbWHI281eOULLd.nAcs8qC3odcEhQO/72RgsxFg6 
+                            roles: 'ROLE_DOCENCIA'
+
+
+    encoders:
+        Symfony\Component\Security\Core\User\User:
+            algorithm: bcrypt
+            cost: 12
+
+    firewalls:
+            # disables authentication for assets and the profiler, adapt it according to your needs
+            dev:
+                pattern: ^/(_(profiler|wdt)|css|images|js)/
+                security: false
+
+            main:
+                anonymous: ~
+                # activate different ways to authenticate
+
+                form_login:
+                    login_path: /login
+                    check_path: /login_check
+
+
+                logout:
+                    path:   /logout
+                    target: /login
+
+    access_control:
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/registro/new/.+, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin, roles: [ ROLE_ADMIN, ROLE_COMPUTO, ROLE_DOCENCIA ] }
+#        - { path: ^/registro, roles: [ ROLE_ADMIN, ROLE_COMPUTO, ROLE_DOCENCIA ] }
