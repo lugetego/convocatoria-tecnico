@@ -47,7 +47,7 @@ class AdminController extends Controller
     /**
      * Displays a form to edit an existing Referencia entity.
      *
-     * @Route("/{id}/eval", name="form_eval")
+     * @Route("/{id/eval", name="form_eval")
      * @Template("admin/eval.html.twig")
      * @Method({"GET", "POST"})
      */

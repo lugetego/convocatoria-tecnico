@@ -17,7 +17,7 @@
 
         <ul class="breadcrumb">
             <li><a href="{{ path('admin') }}">Solicitudes de registro</a></li>
-            <li class="active">Solicitud {{ registro.slug|title }}</li>
+            <li class="active">Solicitud {{ registro.slug}}</li>
 
         </ul>
 
@@ -145,7 +145,7 @@
             <a href="{{ path('admin') }}" class="btn btn-primary">
                 Ver solicitudes
             </a>
-            <a href="{{ path('registro_eval', { 'id': registro.id }) }}" class="btn btn-primary">
+            <a href="{{ path('registro_eval', {'id': registro.id }) }}" class="btn btn-primary">
                 Evaluar solicitud
             </a>
         </div>
