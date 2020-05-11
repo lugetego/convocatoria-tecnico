@@ -87,17 +87,15 @@ class RegistroController extends Controller
     /**
      * Finds and displays a Registro entity.
      *
-     * @Route("/{id}", name="registro_show")
+     * @Route("/{slug}", name="registro_show")
      * @Method("GET")
      */
     public function showAction(Registro $registro)
     {
         $deleteForm = $this->createDeleteForm($registro);
-        $tipo = $registro->getTipo();
 
 
-        if( ($this->isGranted('ROLE_COMPUTO', $registro) && $tipo == 'docencia') ||
-            ($this->isGranted('ROLE_DOCENCIA', $registro) && $tipo == 'cómputo') ){
+        if( !($this->isGranted('ROLE_ADMIN', $registro) )) {
 
             throw $this->createAccessDeniedException('No disponible');
         }
