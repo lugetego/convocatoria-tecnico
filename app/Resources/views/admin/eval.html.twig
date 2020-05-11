@@ -11,57 +11,53 @@
 
 {% block body %}
 
-<div class="container">
+    <div class="container">
 
-    <ul class="breadcrumb">
-        <li><a href="{{ path('admin') }}">Solicitudes</a></li>
-{#        <li><a href="{{ path('registro_show', { 'slug': registro.slug }) }}">Solicitud {{ registro.slug }}</a></li>#}
-        <li class="active">Evaluación</li>
-    </ul>
+        <ul class="breadcrumb">
+            <li><a href="{{ path('admin') }}">Solicitudes</a></li>
+            <li><a href="{{ path('registro_show', { 'slug': slug }) }}"> {{ slug }}</a></li>
+            <li class="active">Evaluación</li>
+        </ul>
 
-    <form action="{{ path('registro_eval', { 'id': id }) }}" method="post" {{ form_enctype(registro) }}>
+        <form action="{{ path('form_eval', { 'id': id }) }}" method="post" {{ form_enctype(registro) }}>
 
 
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="page-header col-lg-12">
-                            <h1><small><i class="fa fa-check-square"></i> Evaluación</small></h1>
-                        </div>
-
-                        <div class="col-lg-4">
-                            <div class="form-group">
-                                <div >
-                                    {{ form_label(registro.activo) }}
-                                </div>
-                                <div>
-                                    {% spaceless %}
-                                        {% for child in registro.activo %}
-                                            <div class="radio-inline">
-                                                {{ form_widget(child) }}  {{ form_label(child, null, {'label_attr': {'class': 'btn btn-default btn-xs'}}) }}
-                                            </div>
-                                        {% endfor %}
-                                    {% endspaceless %}
-                                </div>
-                                <div>{{ form_errors(registro.activo) }}</div>
+            <div class="card">
+                <div class="card-header">
+                    <h1><small><i class="fa fa-check-square"></i> Evaluación {{ slug }}</small></h1>
+                </div>
+                <div class="card-body">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <div >
+                                {{ form_label(registro.activo) }}
                             </div>
+                            <div>
+                                {% spaceless %}
+                                    {% for child in registro.activo %}
+                                        <div class="radio-inline">
+                                            {{ form_widget(child) }}  {{ form_label(child, null, {'label_attr': {'class': 'btn btn-default btn-xs'}}) }}
+                                        </div>
+                                    {% endfor %}
+                                {% endspaceless %}
+                            </div>
+                            <div>{{ form_errors(registro.activo) }}</div>
                         </div>
-
-
                     </div>
                 </div>
-
-                <div class="col-lg-12 col-lg-offset-4">
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
                     {{ form_rest(registro) }}
-                    <button type="submit"  class="btn btn-default">Guardar</button>
+                    <button type="submit"  class="btn btn-primary">Guardar</button>
                     <button class="btn btn-danger" >Cancelar</button>
                 </div>
             </div>
-        </div>
+        </form>
+    </div>
 
-    </form>
 
 
-</div>
+
+
 {% endblock %}

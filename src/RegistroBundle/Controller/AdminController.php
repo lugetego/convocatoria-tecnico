@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use RegistroBundle\Entity\Registro;
 use RegistroBundle\Form\RegistroType;
 
+
 /**
  * Register controller.
  *
@@ -39,25 +40,20 @@ class AdminController extends Controller
             'registros' => $registros,
         ));
 
-
-
     }
 
 
     /**
      * Displays a form to edit an existing Referencia entity.
      *
-     * @Route("/{id/eval", name="form_eval")
+     * @Route("/{id}/eval", name="form_eval")
      * @Template("admin/eval.html.twig")
      * @Method({"GET", "POST"})
      */
     public function evalAction(Request $request, $id)
     {
-
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('RegistroBundle:Registro')->find($id);
-
-
 
         $formEval = $this->createFormBuilder($entity)
 
@@ -69,10 +65,7 @@ class AdminController extends Controller
                 'required'=>false,
                 'placeholder'=>false,
             ))
-
-
             ->getForm();
-
 
         $formEval->handleRequest($request);
 
@@ -81,13 +74,11 @@ class AdminController extends Controller
             $em->persist($entity);
             $em->flush();
 
-
-
-            return $this->redirectToRoute('registro_show', array('id' => $id));
+            return $this->redirectToRoute('registro_show', array('slug' => $entity->getSlug()));
 
         }
         // $form   = $this->createForm($formEval, $entity);
-        return $this->render('admin/eval.html.twig', array('registro' => $formEval->createView(),'id'=> $id));
+        return $this->render('admin/eval.html.twig', array('registro' => $formEval->createView(),'id'=> $id, 'slug'=>$entity->getSlug()));
         //return $this->redirect($this->generateUrl('registro_show', array('id' => $id)));
 
     }

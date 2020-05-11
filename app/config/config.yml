@@ -45,6 +45,21 @@ stof_doctrine_extensions:
             timestampable: true
             sluggable: true
 
+services:
+    twig.extension.text:
+        class: Twig_Extensions_Extension_Text
+        tags:
+            - { name: twig.extension }
+    twig.extension.intl:
+        class: Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension }
+    twig.extension.date:
+        class: Twig_Extensions_Extension_Date
+        tags:
+            - { name: twig.extension }
+
+
 # Doctrine Configuration
 doctrine:
     dbal:

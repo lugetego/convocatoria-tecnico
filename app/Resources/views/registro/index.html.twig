@@ -62,8 +62,8 @@
                         <td>{{ registro.mail }}</td>
 
 
-                        <td>{% if registro.ref1recomName %}<span class="label label-success "><i class="fa fa-check-square"></i> Si</span> {% else %}<span class="label label-danger"><i class="fa fa-times-circle"></i> No</span>{% endif %} </td>
-                        <td>{% if registro.ref2recomName %}<span class="label label-success "><i class="fa fa-check-square"></i> Si</span> {% else %}<span class="label label-danger"><i class="fa fa-times-circle"></i> No</span>{% endif %}</td>
+                        <td class="text-center">{% if registro.ref1recomName %}<span class="label label-success "><i class="fa fa-check-square"></i> Si</span> {% else %}<span class="label label-danger"><i class="fa fa-times-circle"></i> No</span>{% endif %} </td>
+                        <td class="text-center">{% if registro.ref2recomName %}<span class="label label-success "><i class="fa fa-check-square"></i> Si</span> {% else %}<span class="label label-danger"><i class="fa fa-times-circle"></i> No</span>{% endif %}</td>
                         <td class="text-center">{% if registro.activo == true %}
                                 <span class="label label-success "><i class="fa fa-check-square"></i> Si</span>
                             {% elseif registro.activo is null %}
