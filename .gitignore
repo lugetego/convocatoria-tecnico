@@ -49,5 +49,4 @@ app/config/parameters.ini
 .idea/
 
 bin/
-/web/submissions/
-/web/submissions/
+
