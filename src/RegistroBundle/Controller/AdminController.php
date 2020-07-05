@@ -33,7 +33,7 @@ class AdminController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         if ($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-            $registros = $em->getRepository('RegistroBundle:Registro')->findAll();
+            $registros = $em->getRepository('RegistroBundle:Registro')->findByActivo(true);
         }
 
         return $this->render('registro/index.html.twig', array(
